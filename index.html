@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web2App Builder | Cuxxyzhost</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:none; }
+    }
+    .fade { animation:fadeIn .5s ease both; }
+
+    @keyframes float {
+      0% { transform:translateY(0); }
+      50% { transform:translateY(-8px); }
+      100% { transform:translateY(0); }
+    }
+    .floating { animation:float 3s ease-in-out infinite; }
+
+    .caret::after {
+      content:"|";
+      animation:blink 1s infinite;
+    }
+    @keyframes blink {
+      0%,50%,100%{opacity:1}
+      25%,75%{opacity:0}
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-sky-200 via-indigo-200 to-purple-300 min-h-screen flex flex-col">
+
+  <!-- LOGO -->
+  <div class="absolute top-4 left-4 flex items-center gap-3 z-50">
+    <img src="https://files.catbox.moe/3ntvth.jpg"
+         class="w-10 h-10 rounded-full shadow-lg floating"
+         alt="logo">
+    <div id="typingText" class="text-slate-800 font-semibold text-lg caret"></div>
+  </div>
+
+  <main class="flex-grow flex items-center justify-center p-4">
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md p-6 sm:p-8 fade">
+      <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">🚀 Web2App</h1>
+      <p class="text-center text-slate-600 mb-6">Ubah website jadi APK dalam 5 menit</p>
+
+      <form id="form" class="space-y-4">
+        <input id="url" type="url" placeholder="https://example.com" required class="w-full px-4 py-2 rounded-lg border">
+        <input id="name" type="text" placeholder="Nama Aplikasi" required class="w-full px-4 py-2 rounded-lg border">
+        <input id="email" type="email" placeholder="Email kamu" required class="w-full px-4 py-2 rounded-lg border">
+
+        <button class="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-lg flex justify-center items-center">
+          <span id="btnText">Build APK</span>
+          <svg id="spinner" class="hidden ml-2 h-5 w-5 animate-spin" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path fill="currentColor" class="opacity-75"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+          </svg>
+        </button>
+      </form>
+
+      <div id="result" class="hidden mt-6 text-center fade">
+        <p id="msg" class="mb-3 text-slate-700"></p>
+        <a id="dlLink" target="_blank"
+           class="inline-block bg-green-500 text-white py-2 px-6 rounded-lg">
+           📥 Download APK
+        </a>
+      </div>
+
+      <div id="toast"
+        class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded opacity-0">
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center py-4 text-sm text-slate-600/80">
+    © 2025 Cuxxyzhost
+  </footer>
+
+  <!-- SCRIPT DIPISAH -->
+  <script src="build.js"></script>
+</body>
+</html>
